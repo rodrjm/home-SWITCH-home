@@ -1,0 +1,52 @@
+  <% if current_user.try(:admin?) %>
+   <div class="container">
+      <ul class="nav nav-tabs nav-justified nav-pills ">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-" <%= link_to "Ver listado de residencias", residences_path, {:style=>"color:black"}%> </button></a>
+    </li>
+    <ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary  my-2 my-sm-"<%= link_to "Ver listado de usuarios", users_path,  {:style=>"color:black"} %></button></a>
+      </ul>
+      <ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-" <%= link_to "Ver listado de Administradores", indexAdmin_path,  {:style=>"color:black"} %></button></a>
+    </li>
+    </ul>
+    <ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-"<%= link_to "Establecer subasta", new_auction_path,  {:style=>"color:black"} %></button></a>
+    </li>
+    </ul>
+    <ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-"<%= link_to "Establecer hot sale", new_hotsale_path,  {:style=>"color:black"} %></button></a>
+    </li>
+    </ul>
+  </ul>
+
+  </div>
+  <%-else  %>
+     <div class="container">
+      <ul class="nav nav-tabs nav-justified nav-pills ">
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-" <%= link_to "Ver listado de residencias", residences_path, {:style=>"color:black"}%> </button></a>
+    </li>
+ <% if current_user != nil %>
+  <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-"<%= link_to "Ver mis reservas", reserves_path,  {:style=>"color:black"} %></button></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-"<%= link_to "Ver Hot Sales", hotsales_path,  {:style=>"color:black"} %></button></a>
+    </li>
+    <% if current_user.premium != true %>
+    <li class="nav-item">
+      <a class="nav-link btn btn-primary-primary my-2 my-sm-" <%= link_to "Ver mis subastas", auctions_path, {:style=>"color:black"}%> </button></a>
+    </li>
+    <% end %>
+</div>
+</ul>
+  <% end %>
+  <% end %>
+</html>
+

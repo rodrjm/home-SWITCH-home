@@ -1,0 +1,80 @@
+<body>
+ 
+<div class="container-fluid">
+  <h1> </h1>
+  <div class="card" style=" width:700px; background:#FFFFFF">
+    <div class="card-body">
+<h2>Registrarme</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :surname, "Apellido" %><br />
+    <%= f.text_field :surname, required: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "Contraseña" %>
+    <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> digitos como minimo)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "Contraseña", required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "Contraseña", required: true %>
+  </div>
+
+  <div class="field" >
+    <%= f.label :birth, "Fecha de nacimiento" %><br />
+    <%= f.date_field :birth, autocomplete: "Fecha de nacimiento", required: true %>
+  </div>
+
+   <div class="field">
+    <%= f.label :card, "Numero de tarjeta" %> 
+    <em>(16 digitos)</em><br />
+    <%= f.number_field :card, autocomplete: "Numero", required: true %>
+   </div>
+  
+  <div class="field">
+    <%= f.label :cvv, "Numero de validacion" %>
+    <em>(3 digitos)</em><br />
+    <%= f.number_field :cvv, autofocus: true, autocomplete: "Numero", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :expiration, "Fecha de vencimiento"%><br/>
+    <%= month_field("user", "expiration", options = { required: true } ) %>
+  </div>
+
+  <div >
+    <%= f.label :image, 'Foto' %>
+    <%= f.text_field :image, class: 'form-control', placeholder: 'Ingrese la URL de su foto/avatar', optional: true%>
+  </div>
+</br>
+  <div class="actions">
+    <%= f.submit "Registrarme" %>
+  </div>
+<% end %>
+
+
+</aside>
+  </div>
+  </div>
+  <br>
+ 
+</div>
+
+</body>

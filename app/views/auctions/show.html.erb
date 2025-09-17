@@ -1,0 +1,53 @@
+<div class="container fluid, p-8 mb-8 bg-standard text-grey".bg-standard>
+  <h1> <%= Residence.find(@auction.residence_id).name %> </h1>
+</div>
+
+<body>
+	<div class="container">
+		<section class="main row">
+			<article class="col-md-12 col-sm-8 col-md-9 col-lg-9 mb-2 bg-primary text-white".bg-secondary>
+				<h3> <%= "Fecha a subastar" %> </h3>
+				<h3> <%= @auction.date.to_date %> </h3>
+			</article>
+			<% if Date.today >= @auction.startDate.to_date && if @auction.bids.size != 0 %>
+				<aside class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-3 mb-2 bg-secondary text-white".bg-secondary>
+					<h3> <%= "Precio actual" %> </h3>
+					<h5> <%= @auction.actualPrice %> </h5>
+				</aside>
+				<aside class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-3 mb-2 bg-secondary text-white".bg-secondary>
+					<h3> <%= "Usuario ganador al momento" %> </h3>
+					<h5> <%= User.find(@auction.user_id).name %> </h5>
+				</aside>
+			<% else %>
+				<aside class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-3 mb-2 bg-secondary text-white".bg-secondary>
+					<h3> <%= "Precio inicial" %> </h3>
+					<h5> <%= @auction.initPrice %> </h5>
+				</aside>
+			<% end %>
+			<% end %>
+		</section>
+	</div>
+
+	<div class="p-3 mb-2 bg-secondary text-white".bg-secondary>
+		<h3> <%= "Fecha de inicio de la subasta: " %> <%= @auction.startDate %> </h3>
+	</div>
+
+	<% if @auction.inscriptions.size != 0 %>
+		<div class="p-3 mb-2 bg-secondary text-white".bg-secondary>
+			<h3> <%= "Cantidad de usuarios inscriptos: #{@auction.inscriptions.size}" %> </h3>
+		</div>
+	<% end %>
+</body>
+<body style="background-color:#A9CBBC;"> <!-- color de fondo -->
+</body>
+
+<%- if current_user != nil && if Date.today >= @auction.startDate.to_date %>
+	<%- if current_user.admin == true %>
+		<%= link_to 'Finalizar subasta', endAuction_path(id: @auction.id), class: 'btn btn-danger btn-lg' %>
+	<% else %>
+		<%= link_to 'Pujar', new_bid_path(id: @auction.id), class: 'btn btn-success btn-lg' %>
+	<% end %>
+<% end %>
+<% end %>
+
+<%= link_to 'Volver', root_path, class: 'btn btn-secondary btn-sm' %>

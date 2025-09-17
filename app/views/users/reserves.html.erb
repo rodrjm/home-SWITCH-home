@@ -1,0 +1,23 @@
+<h2>Reservas del usuario</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th width="80%"> Nombre de la residencia </th>
+			<th width="20%"> Descripcion </th>
+			<th colspan="2"></th>
+		</tr>
+	</thead>
+
+<tbody>
+	<% User.find(current_user.id).reserves.each do |reserve| %>
+	<tr>
+		<td><%=Residence.find(reserve.residence_id).name %> </td>
+		<td><%=Residence.find(reserve.residence_id).description %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+<%= link_to 'Volver', root_path, class: 'btn btn-default' %>
+<br> 
+
